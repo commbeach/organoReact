@@ -5,7 +5,7 @@ import './Formulario.css'
 import { useState } from 'react'
 
 
-const Formulario = () => {
+const Formulario = (props) => {
 
     const times =[
         'Suporte',
@@ -15,7 +15,6 @@ const Formulario = () => {
         'Top Laner'
     ]   
 
-    //teste
     const [nome, setNome] = useState('')
     const [cargo, setCargo] = useState('')
     const [imagem, setImagem] = useState('')
@@ -25,6 +24,12 @@ const Formulario = () => {
     const aoSalvar = (evento) =>{
         evento.preventDefault()
         console.log("Form foi submetido => ", nome, cargo, imagem, time)
+        props.aoCadastro({
+            nome,
+            cargo,
+            imagem,
+            time
+        })
     }
 
     return (
