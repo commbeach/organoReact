@@ -7,14 +7,6 @@ import { useState } from 'react'
 
 const Formulario = (props) => {
 
-    const times =[
-        'Suporte',
-        'Atirador',
-        'Mid Laner',
-        'Jungler',
-        'Top Laner'
-    ]   
-
     const [nome, setNome] = useState('')
     const [cargo, setCargo] = useState('')
     const [imagem, setImagem] = useState('')
@@ -23,7 +15,6 @@ const Formulario = (props) => {
 
     const aoSalvar = (evento) =>{
         evento.preventDefault()
-        console.log("Form foi submetido => ", nome, cargo, imagem, time)
         props.aoCadastro({
             nome,
             cargo,
@@ -60,7 +51,7 @@ const Formulario = (props) => {
                 />
 
                 <ListaSuspensa 
-                    itens={times} 
+                    itens={props.times} 
                     label="Lane" 
                     obrigatorio={true}
                     valor={time}
