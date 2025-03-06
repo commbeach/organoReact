@@ -4,7 +4,7 @@ const Banner = () =>{
     //JSX
     return (
         <header className="banner">
-            <img src="/imagens/banner.png" alt="O banner principal da página Organo"/>
+            <img src="/imagens/sr.jpg" alt="O banner principal da página Organo"/>
         </header>
         
     )

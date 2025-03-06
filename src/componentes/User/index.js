@@ -1,9 +1,9 @@
 import './User.css'
 
-const User = ({nome, imagem, cargo}) => {
+const User = ({nome, imagem, cargo, corDeFundo}) => {
     return(
         <div className="user">
-            <div className="cabecalho">
+            <div className="cabecalho" style={{backgroundColor:corDeFundo}}>
                 <img src={imagem} alt='mafe' />
             </div>
             <div className="rodape">
