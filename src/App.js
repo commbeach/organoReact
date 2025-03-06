@@ -2,56 +2,68 @@ import { useState } from 'react';
 import Banner from './componentes/Banner';
 import Formulario from './componentes/Formulario';
 import Time from './componentes/Time';
+import Titulo from './componentes/Titulo';
 
 function App() {
 
-  const times = [
+  const [times, setTimes] = useState([
     {
       nome: 'Suporte',
-      corPrimaria: '#57c278',
-      corSecundaria: '#d9f7e9',
+      cor: '#57c278',
     },
     {
       nome: 'Atirador',
-      corPrimaria: '#82cffa',
-      corSecundaria: '#e8f8ff',
+      cor: '#82cffa',
     },
     {
       nome: 'Jungler',
-      corPrimaria: '#e06b69',
-      corSecundaria: '#fde7e8',
+      cor: '#e06b69',
     },
     {
       nome: 'Mid Laner',
-      corPrimaria: '#ffba05',
-      corSecundaria: '#fff5d9',
+      cor: '#ffba05',
     },
     {
       nome: 'Top Laner',
-      corPrimaria: '#d86ebf',
-      corSecundaria: '#fae9f5',
+      cor: '#d86ebf',
     }
-  ]
+  ])
 
   const [users, setUsers] = useState([])
 
   const aoNovoUser = (user) => {
     console.log(user)
-    setUsers([...users,user])
+    setUsers([...users, user])
+  }
+
+  const deletarUser = (t) => {
+    console.log("ao deletar", t)
+  }
+
+  const mudarCorTime = (cor, nome) => {
+    setTimes(times.map(time => {
+      if (time.nome === nome) {
+        time.cor = cor;
+      }
+      return time;
+    }
+    ))
   }
 
   return (
     <div className="App">
       <Banner></Banner>
-      <Formulario times={times.map(time => time.nome)} aoCadastro = {user => aoNovoUser (user)}></Formulario>
-      {times.map(time => 
-      <Time 
-        key={time.nome} 
-        nome={time.nome} 
-        corPrimaria={time.corPrimaria} 
-        corSecundaria={time.corSecundaria}
-        users={users.filter(user => user.time === time.nome)}
-      />)}
+      <Formulario times={times.map(time => time.nome)} aoCadastro={user => aoNovoUser(user)}></Formulario>
+      <Titulo>Meu Time</Titulo>
+      {times.map(time =>
+        <Time
+          key={time.nome}
+          nome={time.nome}
+          cor={time.cor}
+          users={users.filter(user => user.time === time.nome)}
+          aoDeletar={deletarUser}
+          mudarCor={mudarCorTime}
+        />)}
     </div>
   );
 }

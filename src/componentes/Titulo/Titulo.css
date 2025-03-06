@@ -1,0 +1,13 @@
+.titulo{
+    text-align: center;
+    padding: 32px;
+    position: relative;
+}
+
+.titulo h3{
+    font-size: 48px;
+    border-bottom: 4px solid;
+    display: inline-block;
+    padding-bottom: 8px;
+    color:rgb(111, 3, 212)
+}
