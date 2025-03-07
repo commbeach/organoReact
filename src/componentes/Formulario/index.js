@@ -8,9 +8,9 @@ import { useState } from 'react'
 const Formulario = (props) => {
 
     const [nome, setNome] = useState('')
-    const [cargo, setCargo] = useState('')
+    const [titulo, setTitulo] = useState('')
     const [imagem, setImagem] = useState('')
-    const [time, setTime] = useState('')
+    const [lane, setLane] = useState('')
     const [region, setRegion] = useState('')
 
 
@@ -18,15 +18,15 @@ const Formulario = (props) => {
         evento.preventDefault()
         props.aoCadastro({
             nome,
-            cargo,
+            titulo,
             imagem,
-            time,
+            lane,
             region
         })
         setNome('')
-        setCargo('')
+        setTitulo('')
         setImagem('')
-        setTime('')
+        setLane('')
         setRegion('')
     }
 
@@ -46,8 +46,8 @@ const Formulario = (props) => {
                     label="Título" 
                     obrigatorio={true} 
                     placeholder="Digite o Título" 
-                    valor={cargo}
-                    aoAlterado={valor => setCargo(valor)}
+                    valor={titulo}
+                    aoAlterado={valor => setTitulo(valor)}
                 />
 
                 <CampoTexto 
@@ -58,11 +58,11 @@ const Formulario = (props) => {
                 />
 
                 <ListaSuspensa 
-                    itens={props.times} 
+                    itens={props.lanes} 
                     label="Lane" 
                     obrigatorio={true}
-                    valor={time}
-                    aoAlterado={valor => setTime(valor)}
+                    valor={lane}
+                    aoAlterado={valor => setLane(valor)}
                 />
 
                 <ListaSuspensa 

@@ -2,7 +2,7 @@ import User from '../User'
 import hexToRgba from 'hex-to-rgba';
 import './Time.css'
 
-const Time = ({time, users, aoDeletar, mudarCor }) => {
+const Time = ({time, users, aoDeletar, mudarCor, aoFav }) => {
     const css = { backgroundImage: 'url(/imagens/fundo.png)', backgroundColor: hexToRgba(time.cor, 0.4) }
     return (
         users.length > 0 &&
@@ -18,7 +18,8 @@ const Time = ({time, users, aoDeletar, mudarCor }) => {
                     return <User key={user.id}
                         user={user}
                         corDeFundo={time.cor}
-                        aoDeletar={aoDeletar} />
+                        aoDeletar={aoDeletar}
+                        aoFav={aoFav} />
                 })}
             </div>
         </section>

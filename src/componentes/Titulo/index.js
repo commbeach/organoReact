@@ -8,6 +8,7 @@ const Titulo = (props) =>{
             <div className="botao-container">
                 <Botao clique={props.lane}>Filtrar por Lane</Botao>
                 <Botao clique={props.regiao}>Filtrar por Região</Botao>
+                <Botao clique={props.fav}>Filtrar por Favorito</Botao>
             </div>
         </section>
 

@@ -16,5 +16,5 @@
 .titulo .botao-container {
     display: flex;
     justify-content: center; 
-    gap: 30%;
+    gap: 20%;
 }

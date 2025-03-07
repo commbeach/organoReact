@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 function App() {
 
-  const [times, setTimes] = useState([
+  const [lanes, setLanes] = useState([
     {
       id: uuidv4(),
       nome: 'Suporte',
@@ -34,6 +34,16 @@ function App() {
       cor: '#d86ebf',
     }
   ])
+
+  const [favs, setFavs] = useState([
+    {
+      id: uuidv4(),
+      nome: 'Favoritos',
+      cor: '#d86ebf',
+    },
+
+  ])
+
 
   const [regions, setRegions] = useState([
     {
@@ -66,42 +76,47 @@ function App() {
   const inicial = [
     {
       id: uuidv4(),
+      favorito: false,
       nome: "FIORA",
-      cargo: "A Grande Duelista",
+      titulo: "A Grande Duelista",
       imagem: "https://i.pinimg.com/736x/31/d9/db/31d9db3890d283f644edeb1032382977.jpg",
-      time: times[4].nome,
+      lane: lanes[4].nome,
       region: regions[0].nome
     },
     {
       id: uuidv4(),
+      favorito: false,
       nome: "GAREN",
-      cargo: "O Poder de Demacia",
+      titulo: "O Poder de Demacia",
       imagem: "https://preview.redd.it/5u3cchijozt21.png?auto=webp&s=7cb29beb9c5c9e1dec7a0bd7d782d2242806e2ee",
-      time: times[4].nome,
+      lane: lanes[4].nome,
       region: regions[0].nome
     },
     {
       id: uuidv4(),
+      favorito: false,
       nome: "YUUMI",
-      cargo: "A Gata Mágica",
+      titulo: "A Gata Mágica",
       imagem: "https://i.redd.it/849hp76jous41.png",
-      time: times[0].nome,
+      lane: lanes[0].nome,
       region: regions[2].nome
     },
     {
       id: uuidv4(),
+      favorito: false,
       nome: "IRELIA",
-      cargo: "A Dançarina das Lâminas",
+      titulo: "A Dançarina das Lâminas",
       imagem: "https://leagueofitems.com/images/champions/tiles/256/39.webp",
-      time: times[3].nome,
+      lane: lanes[3].nome,
       region: regions[1].nome
     },
     {
       id: uuidv4(),
+      favorito: false,
       nome: "EZREAL",
-      cargo: "O Explorador Prodígio",
+      titulo: "O Explorador Prodígio",
       imagem: "https://i.pinimg.com/736x/d2/06/d4/d206d42677f6a8ec4a905c7131cf2e36.jpg",
-      time: times[1].nome,
+      lane: lanes[1].nome,
       region: regions[0].nome
     }
   ]
@@ -118,14 +133,28 @@ function App() {
     setUsers(users.filter(user => user.id !== id))
   }
 
-  const mudarCorTime = (cor, id) => {
-    setTimes(times.map(time => {
-      if (time.id === id) {
-        time.cor = cor;
+  const mudarCorLane = (cor, id) => {
+    setLanes(lanes.map(lane => {
+      if (lane.id === id) {
+        lane.cor = cor;
       }
-      return time;
+      return lane;
     }
     ))
+  }
+
+  const favoritarUser = (id) =>{
+    setUsers(users.map(user =>{
+      if(user.id === id){
+        if(user.favorito){
+          user.favorito=false
+        }
+        else{
+          user.favorito=true
+        }
+      }
+      return user;
+    }))
   }
 
   const mudarCorRegion = (cor, id) => {
@@ -134,6 +163,16 @@ function App() {
         region.cor = cor;
       }
       return region;
+    }
+    ))
+  }
+
+  const mudarCorFav = (cor, id) => {
+    setFavs(favs.map(fav => {
+      if (fav.id === id) {
+        fav.cor = cor;
+      }
+      return fav;
     }
     ))
   }
@@ -151,26 +190,33 @@ function App() {
 
   }
 
+  const filtroFav = () =>{
+    setFiltro('fav')
+    console.log(filtro)
+  }
+
   return (
     <div className="App">
       <Banner></Banner>
       <Formulario 
-        times={times.map(time => time.nome)} 
+        lanes={lanes.map(lane => lane.nome)} 
         regions={regions.map(regions => regions.nome)}
         aoCadastro={user => aoNovoUser(user)}
       ></Formulario>
       <Titulo
         regiao={filtroRegion}
         lane={filtroLane}
+        fav={filtroFav}
       >Meus Champions</Titulo>
       {filtro==='lane' &&
-        times.map(time =>
+        lanes.map(lane =>
           <Time
-            key={time.id}
-            time={time}
-            users={users.filter(user => user.time === time.nome)}
+            key={lane.id}
+            time={lane}
+            users={users.filter(user => user.lane === lane.nome)}
             aoDeletar={deletarUser}
-            mudarCor={mudarCorTime}
+            aoFav={favoritarUser}
+            mudarCor={mudarCorLane}
         />)}
       {filtro==='regiao' &&
         regions.map(region =>
@@ -179,7 +225,18 @@ function App() {
             time={region}
             users={users.filter(user => user.region === region.nome)}
             aoDeletar={deletarUser}
+            aoFav={favoritarUser}
             mudarCor={mudarCorRegion}
+      />)}
+      {filtro==='fav' &&
+        favs.map(fav =>
+          <Time
+            key={fav.id}
+            time={fav}
+            users={users.filter(user => user.favorito)}
+            aoDeletar={deletarUser}
+            aoFav={favoritarUser}
+            mudarCor={mudarCorFav}
       />)}
     </div>
   );
