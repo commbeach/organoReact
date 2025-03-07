@@ -197,7 +197,6 @@ function App() {
 
   return (
     <div className="App">
-      <Banner></Banner>
       <Formulario 
         lanes={lanes.map(lane => lane.nome)} 
         regions={regions.map(regions => regions.nome)}
