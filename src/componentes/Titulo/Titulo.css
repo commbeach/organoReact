@@ -9,5 +9,12 @@
     border-bottom: 4px solid;
     display: inline-block;
     padding-bottom: 8px;
-    color:rgb(111, 3, 212)
+    color: #6278F7;
+}
+
+
+.titulo .botao-container {
+    display: flex;
+    justify-content: center; 
+    gap: 30%;
 }

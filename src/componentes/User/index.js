@@ -1,20 +1,21 @@
 import { IoIosCloseCircle } from "react-icons/io";
 import './User.css'
 
-const User = ({nome, imagem, cargo, corDeFundo, aoDeletar}) => {
+const User = ({user, corDeFundo, aoDeletar}) => {
     return(
         <div className="user">
              <IoIosCloseCircle 
                 size={25} 
                 className="deletar" 
-                onClick={aoDeletar} 
+                onClick={() => aoDeletar(user.id)} 
             />
             <div className="cabecalho" style={{backgroundColor:corDeFundo}}>
-                <img src={imagem} alt='mafe' />
+                <img src={user.imagem} alt='icon campeão' />
             </div>
             <div className="rodape">
-                <h4>{nome}</h4>
-                <h5>{cargo}</h5>
+                <h4>{user.nome}</h4>
+                <h5>{user.cargo}</h5>
+                <h4>{user.region}</h4>
             </div>
         </div>
 

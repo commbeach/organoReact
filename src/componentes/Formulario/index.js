@@ -11,6 +11,7 @@ const Formulario = (props) => {
     const [cargo, setCargo] = useState('')
     const [imagem, setImagem] = useState('')
     const [time, setTime] = useState('')
+    const [region, setRegion] = useState('')
 
 
     const aoSalvar = (evento) =>{
@@ -19,12 +20,14 @@ const Formulario = (props) => {
             nome,
             cargo,
             imagem,
-            time
+            time,
+            region
         })
         setNome('')
         setCargo('')
         setImagem('')
         setTime('')
+        setRegion('')
     }
 
     return (
@@ -34,15 +37,15 @@ const Formulario = (props) => {
                 <CampoTexto 
                     label="Nome" 
                     obrigatorio={true} 
-                    placeholder="Digite seu nome"
+                    placeholder="Digite o Nome"
                     valor={nome}
                     aoAlterado={valor => setNome(valor)}
                 />
 
                 <CampoTexto 
-                    label="Role" 
+                    label="Título" 
                     obrigatorio={true} 
-                    placeholder="Digite sua Role" 
+                    placeholder="Digite o Título" 
                     valor={cargo}
                     aoAlterado={valor => setCargo(valor)}
                 />
@@ -60,6 +63,14 @@ const Formulario = (props) => {
                     obrigatorio={true}
                     valor={time}
                     aoAlterado={valor => setTime(valor)}
+                />
+
+                <ListaSuspensa 
+                    itens={props.regions} 
+                    label="Região" 
+                    obrigatorio={true}
+                    valor={region}
+                    aoAlterado={valor => setRegion(valor)}
                 />
 
                 <Botao>Cria Card</Botao>
